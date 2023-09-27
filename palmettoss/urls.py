@@ -16,7 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework import routers
+from pssdb.views import (SSSViewSet, SchoolViewSet)
+from django.urls import include
+
+router = routers.DefaultRouter()
+router.register("School", SchoolViewSet)
+router.register('SSS', SSSViewSet)
+
+print(router.urls)
 
 urlpatterns = [
+    path('', include(router.urls)),
     path('admin/', admin.site.urls),
 ]
